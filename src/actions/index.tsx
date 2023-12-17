@@ -14,7 +14,7 @@ export async function getOpenTabs(useOriginalFavicon: boolean): Promise<Tab[]> {
   try {
     const openTabs = await runAppleScript(`
       set _output to ""
-      tell application "Google Chrome"
+      tell application "Sidekick"
         repeat with w in windows
           set _w_id to get id of w as inches as string
           set _tab_index to 1
@@ -35,7 +35,7 @@ export async function getOpenTabs(useOriginalFavicon: boolean): Promise<Tab[]> {
       .filter((line) => line.length !== 0)
       .map((line) => Tab.parse(line));
   } catch (err) {
-    if ((err as Error).message.includes('Can\'t get application "Google Chrome"')) {
+    if ((err as Error).message.includes('Can\'t get application "Sidekick"')) {
       LocalStorage.removeItem("is-installed");
     }
     await checkAppInstalled();
@@ -67,14 +67,14 @@ export async function openNewTab({
     `
     set profile to quoted form of "${profile}"
     set link to quoted form of "${url ? url : "about:blank"}"
-    do shell script "open -na 'Google Chrome' --args --profile-directory=" & profile & " " & link
+    do shell script "open -na 'Sidekick' --args --profile-directory=" & profile & " " & link
   `;
 
   switch (openTabInProfile) {
     case SettingsProfileOpenBehaviour.Default:
       script =
         `
-    tell application "Google Chrome"
+    tell application "Sidekick"
       activate
       tell window 1
           set newTab to make new tab ` +
@@ -103,7 +103,7 @@ export async function openNewTab({
 
 export async function setActiveTab(tab: Tab): Promise<void> {
   await runAppleScript(`
-    tell application "Google Chrome"
+    tell application "Sidekick"
       activate
       set _wnd to first window where id is ${tab.windowsId}
       set index of _wnd to 1
@@ -115,7 +115,7 @@ export async function setActiveTab(tab: Tab): Promise<void> {
 
 export async function closeActiveTab(tab: Tab): Promise<void> {
   await runAppleScript(`
-    tell application "Google Chrome"
+    tell application "Sidekick"
       activate
       set _wnd to first window where id is ${tab.windowsId}
       set index of _wnd to 1
@@ -133,7 +133,7 @@ const checkAppInstalled = async () => {
   const appInstalled = await runAppleScript(`
 set isInstalled to false
 try
-    do shell script "osascript -e 'exists application \\"Google Chrome\\"'"
+    do shell script "osascript -e 'exists application \\"Sidekick\\"'"
     set isInstalled to true
 end try
 
@@ -146,7 +146,7 @@ return isInstalled`);
 
 export async function createNewWindow(): Promise<void> {
   await runAppleScript(`
-    tell application "Google Chrome"
+    tell application "Sidekick"
       make new window
       activate
     end tell
