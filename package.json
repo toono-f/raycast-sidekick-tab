@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "sidekick-tab",
-  "title": "Sidekick Tabs",
+  "name": "search-sidekick-tab",
+  "title": "Search Sidekick Tabs",
   "description": "Search Sidekick Tabs",
   "icon": "sidekick-logo.png",
   "author": "toono-f",
@@ -18,9 +18,8 @@
   "license": "MIT",
   "commands": [
     {
-      "name": "search-tab",
-      "title": "Search Tabs",
-      "subtitle": "Sidekick",
+      "name": "search-sidekick-tab",
+      "title": "Search Sidekick Tabs",
       "description": "List all tabs and go to the selected.",
       "mode": "view"
     }

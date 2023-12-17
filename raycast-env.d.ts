@@ -18,13 +18,13 @@ type ExtensionPreferences = {
 declare type Preferences = ExtensionPreferences
 
 declare namespace Preferences {
-  /** Preferences accessible in the `search-tab` command */
-  export type SearchTab = ExtensionPreferences & {}
+  /** Preferences accessible in the `search-sidekick-tab` command */
+  export type SearchSidekickTab = ExtensionPreferences & {}
 }
 
 declare namespace Arguments {
-  /** Arguments passed to the `search-tab` command */
-  export type SearchTab = {}
+  /** Arguments passed to the `search-sidekick-tab` command */
+  export type SearchSidekickTab = {}
 }
 
 
